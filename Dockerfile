@@ -1,12 +1,12 @@
-FROM golang:1.21
+FROM golang:1.23
 
 WORKDIR /app
 
+COPY go.mod go.sum ./
+RUN go mod tidy
+
 COPY . .
 
-RUN go mod download
 RUN go build -o authsvc
-
-EXPOSE 8080
 
 CMD ["./authsvc"]
